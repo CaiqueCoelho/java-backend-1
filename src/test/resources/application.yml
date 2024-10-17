@@ -1,0 +1,29 @@
+#server:
+#    port: 8888
+cors:
+  originPatterns: http://localhost:8080,http://localhost:3000,http://localhost:8081
+security:
+  jwt:
+    token:
+      secret-key: jwtsecretkey
+      expires-length: 3600000
+spring:
+  datasource:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: none # hibernate will not change the structure in the database for me, now I'll use flyway
+      # ddl-auto: update
+    # properties:
+     # hibernate:
+       # dialect: org.hibernate.dialect.MySQLDialect
+      show-sql: false
+  application:
+    name: spring-course-1
+springdoc:
+  pathsToMatch:
+    - /auth/**
+    - /api/**
+  swagger-ui-path:
+    use-root-path: true
