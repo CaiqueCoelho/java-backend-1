@@ -24,7 +24,7 @@ jobs:
       uses: actions/setup-java@v4
       with:
         java-version: '22'
-        distribution: 'slim'
+        distribution: 'adopt'
         cache: maven
 
     - name: Show files in the folder
