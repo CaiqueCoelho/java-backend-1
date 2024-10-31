@@ -92,7 +92,7 @@ public class ConfigYML {
         var accessToken = given()
                 .log().all()
                 .basePath("/auth/signin")
-                .body(credentials.toString())
+                .body(credentials)
                 .when()
                 .post()
                 .then()

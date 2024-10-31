@@ -258,6 +258,31 @@ public class PersonControllerXML extends ConfigXML {
         assertEquals(disabledPerson.getEnabled(), false);
     }
 
+    @Test
+    @Order(12)
+    public void hateaos() throws IOException {
+
+        var content = given()
+                .when()
+                .queryParam("page", "0")
+                .queryParam("size", "10")
+                .queryParam("direction", "asc")
+                .get(PersonEndpoints.ALL_PERSON)
+                .then()
+                .statusCode(200)
+                .extract()
+                .body()
+                .asString();
+
+        assertTrue(content.contains("/api/person/508"));
+        assertTrue(content.contains("<size>10</size>"));
+        assertTrue(content.contains("<totalPages>101</totalPages>"));
+        assertTrue(content.contains("<totalElements>1009</totalElements>"));
+        assertTrue(content.contains("/api/person?sortDirection=asc&amp;page=0&amp;size=10&amp;sort=firstName,asc"));
+        assertTrue(content.contains("/api/person?sortDirection=asc&amp;page=1&amp;size=10&amp;sort=firstName,asc"));
+        assertTrue(content.contains("/api/person?page=0&amp;size=10&amp;sortDirection=asc"));
+    }
+
 
     private PersonVO mockPerson() {
         PersonVO person = new PersonVO();

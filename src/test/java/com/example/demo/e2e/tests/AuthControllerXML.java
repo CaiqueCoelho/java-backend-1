@@ -2,6 +2,7 @@ package com.example.demo.e2e.tests;
 
 import com.example.demo.e2e.config.ConfigXML;
 import com.example.demo.e2e.config.IntegrationTestUtil;
+import com.example.demo.e2e.config.PersonEndpoints;
 import com.example.demo.e2e.pojo.AccountCredentialsVO;
 import com.example.demo.e2e.pojo.TokenVO;
 import org.junit.jupiter.api.MethodOrderer;
@@ -12,6 +13,7 @@ import org.junit.jupiter.api.TestMethodOrder;
 import java.io.IOException;
 
 import static io.restassured.RestAssured.given;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.testng.Assert.assertNotNull;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)

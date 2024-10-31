@@ -100,6 +100,11 @@ public class PersonController {
         return service.disablePerson(id);
     }
 
+    @PatchMapping(value = "enable/{id}", produces = { "application/json", "application/xml", "application/x-yaml" }, consumes = { "application/json", "application/xml", "application/x-yaml" })
+    public PersonVO enablePerson(@PathVariable Long id) {
+        return service.enablePerson(id);
+    }
+
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<Void> deletePerson(@PathVariable Long id) {
         service.delete(id);

@@ -249,6 +249,32 @@ public class PersonControllerYml extends ConfigYML {
         assertEquals(disabledPerson.getEnabled(), false);
     }
 
+    @Test
+    @Order(12)
+    public void hateaos() throws IOException {
+
+        var content = given()
+                .when()
+                .queryParam("page", "0")
+                .queryParam("size", "10")
+                .queryParam("direction", "asc")
+                .get(PersonEndpoints.ALL_PERSON)
+                .then()
+                .statusCode(200)
+                .extract()
+                .body()
+                .asString();
+
+        content = content.replace("\n", "").replace("\r", "");
+
+        assertTrue(content.contains("/api/person/508"));
+        assertTrue(content.contains("totalPages: 101"));
+        assertTrue(content.contains("size: 10"));
+        assertTrue(content.contains("totalElements: 1009"));
+        assertTrue(content.contains("/api/person?sortDirection=asc&page=0&size=10&sort=firstName,asc"));
+        assertTrue(content.contains("/api/person?page=0&size=10&sortDirection=asc"));
+        assertTrue(content.contains("/api/person?sortDirection=asc&page=1&size=10&sort=firstName,asc"));
+    }
 
     private PersonVO mockPerson() {
         PersonVO person = new PersonVO();

@@ -39,36 +39,6 @@ public class PersonServicesTest {
         MockitoAnnotations.openMocks(this);
     }
 
-//    @Test
-//    void testFindAll() {
-//        List<Person> list = input.mockEntityList();
-//
-//        when(repository.findAll()).thenReturn(list);
-//        var people = service.findAll();
-//        System.out.println(people);
-//
-//        Assertions.assertNotNull(people);
-//        assertEquals(14, people.size());
-//
-//        var personOne = people.get(1);
-//        Assertions.assertNotNull(personOne.getKey());
-//        Assertions.assertNotNull(personOne.getLinks());
-//        //Assertions.assertTrue(personOne.toString().contains("links: [</api/person/v1/1>;rel=\"self\"]"));
-//        assertEquals(personOne.getAddress(), list.get(1).getAddress());
-//        assertEquals(personOne.getFirstName(), list.get(1).getFirstName());
-//        assertEquals(personOne.getLastName(), list.get(1).getLastName());
-//        assertEquals(personOne.getGender(), list.get(1).getGender());
-//
-//        var personFour = people.get(4);
-//        Assertions.assertNotNull(personFour.getKey());
-//        Assertions.assertNotNull(personFour.getLinks());
-//        //Assertions.assertTrue(personOne.toString().contains("links: [</api/person/v1/1>;rel=\"self\"]"));
-//        assertEquals(personFour.getAddress(), list.get(4).getAddress());
-//        assertEquals(personFour.getFirstName(), list.get(4).getFirstName());
-//        assertEquals(personFour.getLastName(), list.get(4).getLastName());
-//        assertEquals(personFour.getGender(), list.get(4).getGender());
-//    }
-
     // TODO: Failing, should be returning the links, but is not
     @Test
     void testFindById() {

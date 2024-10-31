@@ -263,6 +263,58 @@ public class PersonController extends Config {
         assertEquals(disabledPerson.getEnabled(), false);
     }
 
+    @Test
+    @Order(12)
+    public void findByName() throws IOException {
+
+        WrapperPersonVO wrapperPersonVO = given()
+                .when()
+                .queryParam("page", "0")
+                .queryParam("size", "10")
+                .queryParam("direction", "asc")
+                .pathParam("firstName", "ar")
+                .get(PersonEndpoints.PERSON_BY_NAME)
+                .then()
+                .statusCode(200)
+                .extract()
+                .as(new TypeRef<WrapperPersonVO>() {});
+
+        var people = wrapperPersonVO.getEmbedded().getPersons();
+
+        for (PersonVO personVO : people) {
+            MatcherAssert.assertThat(personVO.getAddress(), not(emptyString()));
+            assertFalse(personVO.getFirstName().isEmpty());
+            assertTrue(personVO.getFirstName().toLowerCase().contains("ar"));
+        }
+    }
+
+    @Test
+    @Order(13)
+    public void hateaos() throws IOException {
+
+        var content = given()
+                .when()
+                .queryParam("page", "0")
+                .queryParam("size", "10")
+                .queryParam("direction", "asc")
+                .get(PersonEndpoints.ALL_PERSON)
+                .then()
+                .statusCode(200)
+                .extract()
+                .body()
+                .asString();
+
+        assertTrue(content.contains("/api/person/508"));
+        assertTrue(content.contains("\"page\": {\n" +
+                "        \"size\": 10,\n" +
+                "        \"totalElements\": 1009,\n" +
+                "        \"totalPages\": 101,\n" +
+                "        \"number\": 0\n" +
+                "    }"));
+        assertTrue(content.contains("/api/person?sortDirection=asc&page=0&size=10&sort=firstName,asc"));
+        assertTrue(content.contains("/api/person?page=0&size=10&sortDirection=asc"));
+        assertTrue(content.contains("/api/person?sortDirection=asc&page=1&size=10&sort=firstName,asc"));
+    }
 
     private PersonVO mockPerson() {
         PersonVO person = new PersonVO();

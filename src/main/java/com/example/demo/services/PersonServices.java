@@ -95,6 +95,18 @@ public class PersonServices {
         return vo;
     }
 
+    @Transactional
+    public PersonVO enablePerson(Long id) {
+        logger.info("Enabling person " + id);
+        repository.enablePerson(id);
+        Person person = repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Person not found for id " + id));
+        logger.info("Applying DozerMapper");
+        PersonVO vo = DozerMapper.parseObject(person, PersonVO.class);
+        logger.info("Applying withSelfRel");
+        vo.add(linkTo(methodOn(PersonController.class).getPerson(id)).withSelfRel());
+        return vo;
+    }
+
     public void delete(Long id) {
         logger.info("Deleting person " + id);
         repository.delete(repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Person not found for id " + id)));

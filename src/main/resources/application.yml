@@ -6,7 +6,7 @@ security:
       secret-key: jwtsecretkey
       expires-length: 3600000
 server:
-    port: 8081
+    port: 8082
 spring:
   datasource:
       driver-class-name: com.mysql.cj.jdbc.Driver
@@ -22,6 +22,12 @@ spring:
      # hibernate:
        # dialect: org.hibernate.dialect.MySQLDialect
       show-sql: false
+  servlet:
+    multipart:
+      enabled: true
+      file-size-threshold: 2KB
+      max-file-size: 20MB
+      max-request-size: 100MB
   application:
     name: spring-course-1
 springdoc:

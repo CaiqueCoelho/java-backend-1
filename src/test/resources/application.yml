@@ -21,6 +21,12 @@ spring:
       show-sql: false
   application:
     name: spring-course-1
+  servlet:
+    multipart:
+      enabled: true
+      file-size-threshold: 2KB
+      max-file-size: 20MB
+      max-request-size: 100MB
 springdoc:
   pathsToMatch:
     - /auth/**
