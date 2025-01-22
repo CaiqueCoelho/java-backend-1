@@ -13,11 +13,13 @@ import org.junit.jupiter.api.TestTemplate;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @Provider("api-person-provider")
+@PropertySource("pactbroker.properties")
 @PactBroker(
         url = "https://omega.pactflow.io/",
         authentication = @PactBrokerAuth(token = "${pact.broker.auth.token}")
