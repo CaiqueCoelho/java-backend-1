@@ -1,5 +1,6 @@
 package com.example.demo.e2e.config;
 
+import au.com.dius.pact.provider.junit5.HttpTestTarget;
 import com.example.demo.e2e.pojo.AccountCredentialsVO;
 import com.example.demo.e2e.pojo.TokenVO;
 import io.restassured.RestAssured;
@@ -34,6 +35,7 @@ public class Config {
     private Integer port;
 
     public static ObjectMapper objectMapper;
+    public String accessToken;
 
     static MySQLContainer<?> mysql = new MySQLContainer<>("mysql:8.0.32");
 
@@ -78,7 +80,7 @@ public class Config {
 
         AccountCredentialsVO credentials = new AccountCredentialsVO("leandro", "admin123");
 
-        var accessToken = given()
+        accessToken = given()
                 .basePath("/auth/signin")
                 .body(credentials)
                 .when()

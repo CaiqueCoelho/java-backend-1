@@ -50,3 +50,33 @@ docker logs <container_id>
 To show the logs in realtime
 docker logs -f <container_id>
 docker images
+
+### Kubernetes
+To create kubectl deployment
+kubectl create deployment spring-course-1-kubernetes --image=caiquecoelho/spring-course-1
+To expose the service
+kubectl expose deployment spring-course-1-kubernetes --type=LoadBalancer --port=8080
+To get the public ip
+kubectl get svc
+To scale
+kubectl scale deployment spring-course-1-kubernetes --replicas=3
+To see the number of pods
+kubectl get pods -o wide
+To delete one replica to test the auto-scaling
+kubectl delete pod spring-course-1-kubernetes-<pode_name>
+Auto-scaling
+kubectl autoscale deployment spring-course-1-kubernetes --cpu-percent=70 --min=3 --max=5
+Changing versions without downstream edit the deployment file
+kubectl edit deployment spring-course-1-kubernetes
+In the file below the repicas number, add a new line called minReadySeconds: 15 and save the file and run
+kubectl set image deployment spring-course-1-kubernetes spring-course-1-kubernetes=caiquecoelho/spring-course:1.2.0
+See the changes of replicas with kubectl get pods -o wide
+To see if the cluster was created
+kubectl config current-context
+kubectl config view
+kubectl get nodes
+kubectl version
+To see the available clusters
+kubectl config get-contexts
+To change
+kubectl config use-context

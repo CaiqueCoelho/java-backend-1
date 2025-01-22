@@ -1,5 +1,9 @@
 #server:
 #    port: 8888
+logging:
+  level:
+    org.springframework: DEBUG
+    org.springframework.test.context: DEBUG
 cors:
   originPatterns: http://localhost:8080,http://localhost:3000,http://localhost:8081
 security:
@@ -8,6 +12,8 @@ security:
       secret-key: jwtsecretkey
       expires-length: 3600000
 spring:
+  main:
+    allow-bean-definition-overriding: true
   datasource:
       driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
